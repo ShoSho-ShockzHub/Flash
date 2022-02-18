@@ -34,11 +34,11 @@ MainSector:Button("Anti Kick / Ban", function()
 AntiKick()
 end)
 
-local sldr = MainSector:Slider("WalkSpeed", 16, 1500, 0, function(v)
+local sldr = MainSector:Slider("WalkSpeed", 16, 1200, 0, function(v)
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
 end)
 
-local sldr = MainSector:Slider("JumpPower", 50, 1500, 0, function(v)
+local sldr = MainSector:Slider("JumpPower", 50, 1200, 0, function(v)
 game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
 end)
 
