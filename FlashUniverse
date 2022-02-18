@@ -6,8 +6,6 @@ local serv = win:Server("Main", "http://www.roblox.com/asset/?id=6031075938")
 
 local MainSector = serv:Channel("Main Sector")
 
-local PlayerSector = serv:Channel("Player Sector")
-
 if getgenv().AutoAntiKick == true then
 local OldNameCall = nil
 OldNameCall = hookmetamethod(game, "__namecall", function(...)
