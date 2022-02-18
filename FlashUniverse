@@ -1,0 +1,50 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/CatzCode/cattoware/main/libraries/ui.lua", true))()
+
+local Window = library:CreateWindow("The Flash Universe", Vector2.new(400, 200), Enum.KeyCode.RightShift)
+local Watermark = library:CreateWatermark("Rei | The Flash Universe") 
+
+Watermark.Visible = getgenv().Watermark
+
+local MainWindow = Window:CreateTab("Main")
+
+local MainSector = MainWindow:CreateSector("Main Sector", "left")
+local PlayerSector = MainWindow:CreateSector("Player Sector", "right")
+
+if getgenv().AutoAntiKick == true then
+local OldNameCall = nil
+OldNameCall = hookmetamethod(game, "__namecall", function(...)
+    local Args = {...}
+    local Self = Args[1]
+if getnamecallmethod() == "Kick" and Self == game.Players.LocalPlayer then
+return print("game tried to kick lel!")
+end
+    return OldNameCall(...)
+end)
+end
+
+function AntiKick()
+local OldNameCall = nil
+OldNameCall = hookmetamethod(game, "__namecall", function(...)
+    local Args = {...}
+    local Self = Args[1]
+if getnamecallmethod()=="Kick" and Self==game.Players.LocalPlayer then
+return print("game tried to kick lel!")
+end
+    return OldNameCall(...)
+end)
+end
+
+local Button1 = MainSector:AddButton("Anti-Kick / Ban", function() 
+AntiKick()
+end)
+
+local WalkSpeed = PlayerSector:AddSlider("WalkSpeed Slider", 16, 16, 1000, 1000, function(v)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+end, "WalkSpeed")
+
+local WalkSpeed = PlayerSector:AddSlider("JumpPower Slider", 16, 16, 1000, 1000, function(v)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+end, "JumpPower")
+
+do
+end
