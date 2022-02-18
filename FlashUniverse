@@ -1,14 +1,12 @@
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/CatzCode/cattoware/main/libraries/ui.lua", true))()
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
 
-local Window = library:CreateWindow("The Flash Universe", Vector2.new(400, 200), Enum.KeyCode.RightShift)
-local Watermark = library:CreateWatermark("Rei | The Flash Universe") 
+local win = DiscordLib:Window("The Flash Universe")
 
-Watermark.Visible = getgenv().Watermark
+local serv = win:Server("Main", "http://www.roblox.com/asset/?id=6031075938")
 
-local MainWindow = Window:CreateTab("Main")
+local MainSector = serv:Channel("Main Sector")
 
-local MainSector = MainWindow:CreateSector("Main Sector", "left")
-local PlayerSector = MainWindow:CreateSector("Player Sector", "right")
+local PlayerSector = serv:Channel("Player Sector")
 
 if getgenv().AutoAntiKick == true then
 local OldNameCall = nil
@@ -34,17 +32,25 @@ end
 end)
 end
 
-local Button1 = MainSector:AddButton("Anti-Kick / Ban", function() 
-AntiKick()
+MainSector:Button("Anti Kick / Ban", function()
+DiscordLib:Notification("Notification", "Killed everyone!", "Okay!")
 end)
 
-local WalkSpeed = PlayerSector:AddSlider("WalkSpeed Slider", 16, 16, 1000, 1000, function(v)
+local sldr = MainSector:Slider("WalkSpeed", 16, 1500, 0, function(v)
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
-end, "WalkSpeed")
+end)
 
-local WalkSpeed = PlayerSector:AddSlider("JumpPower Slider", 16, 16, 1000, 1000, function(v)
+local sldr = MainSector:Slider("JumpPower", 50, 1500, 0, function(v)
 game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
-end, "JumpPower")
+end)
 
-do
+local Player = {}
+for i,v in pairs(game.Players:GetPlayers()) do
+    table.insert(Player, v.Name)
 end
+
+local teleport = MainSector:Dropdown("Teleport To Player", Player, function(Player)
+game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[Player].Character.HumanoidRootPart.CFrame 
+end)
+
+MainSector:Seperator()
