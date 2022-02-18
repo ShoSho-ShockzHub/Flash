@@ -33,7 +33,7 @@ end)
 end
 
 MainSector:Button("Anti Kick / Ban", function()
-DiscordLib:Notification("Notification", "Killed everyone!", "Okay!")
+AntiKick()
 end)
 
 local sldr = MainSector:Slider("WalkSpeed", 16, 1500, 0, function(v)
